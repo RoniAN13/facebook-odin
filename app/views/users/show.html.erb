@@ -1,10 +1,36 @@
-
+<div class="row">
+<aside class="col-md-4">
+<% if @user == current_user %>
  <h1 class="text-center">Profile</h1>
-
+ <%else%>
+ <h1 class="text-center"><%= @user.fullname(@user) %>'s Info</h1>
  <hr>
+ <%= render 'friend_unfriend' %>
+ <%end%>
  <div class="text-center">
  <h4><%= @user.firstname %> <%= @user.lastname%></h4>
-
+<h5><%=  @user.friends.count %> <%= link_to "Friends", friends_user_path(@user)  %></h5>
 <h5><strong>Birthday:</strong> <%= @user.date_of_birth %></h5>
 <h5><strong>Gender:</strong> <%= @user.gender %></h5>
 </div>
+<%= render 'pending_requests' %>
+</aside>
+<div class="col-md-8">
+
+
+<% if @user.posts.any? %>
+<h3>Posts (<%= @user.posts.count %>)</h3>
+<ol class="posts">
+<%= render @posts %>
+</ol>
+
+<% end %>
+</div>
+
+</div>
+
+
+
+
+
+

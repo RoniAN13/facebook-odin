@@ -1,0 +1,12 @@
+<div class="text-center">
+<% if user_signed_in? && !FriendRequest.reacted?(current_user.id, @user.id) && current_user != @user %>
+           <%= link_to 'Add Friend',
+            friend_requests_path(ids: {id1: current_user.id, id2: @user.id}),method: "POST",
+            class:"btn btn-primary"
+          %>
+ <% end %>
+<% if @user != current_user && current_user.friend_with?(@user) %>
+ <%= link_to 'Unfriend',
+        friend_request_path(friend_request_id: FriendRequest.find_request(@user.id, current_user.id)),method: "DELETE",class:"btn btn-primary"  %>
+ <% end %>
+ </div>

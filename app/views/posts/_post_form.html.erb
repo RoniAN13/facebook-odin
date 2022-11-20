@@ -1,0 +1,8 @@
+<%= form_with(model: @post,remote: true,data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |f| %>
+    
+    <div class="field">
+    <%= f.text_area :content, placeholder: "Compose new post..." %>
+    </div>
+    <%= f.submit "Post", class: "btn btn-primary" %>
+    
+<% end %>

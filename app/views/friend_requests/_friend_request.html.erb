@@ -1,0 +1,9 @@
+<% current_user.pending_requests.each do |request| %>
+    <li>
+      <%= User.find(request.requestor_id).firstname %>
+      <%= link_to 'Accept',
+      friend_request_path(friend_request_id: request.id),method: "PATCH",class:"btn btn-primary" %>
+      <%= link_to 'Reject',
+      friend_request_path(friend_request_id: request.id),method: "DELETE",class:"btn btn-primary" %>
+    </li>
+    <%end%>

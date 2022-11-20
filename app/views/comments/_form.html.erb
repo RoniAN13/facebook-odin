@@ -1,0 +1,14 @@
+<%= form_with model: [post, post.comments.build],remote:true do |f| %>
+    
+    <div>
+      <%= f.text_area :content,style:"width:300px",class: "form-control" %>
+      
+    </div>
+  <% if !parent.nil? %>
+  <%= f.text_field :parent_id , value: parent.id , type:"hidden" %>
+  <%end%>
+  
+    <div>
+      <%= f.submit "Comment" , class: "btn btn-primary",style: "width:100px"  %>
+    </div>
+  <% end %>
