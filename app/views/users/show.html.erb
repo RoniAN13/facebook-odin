@@ -1,14 +1,19 @@
 <div class="row">
-<aside class="col-md-4">
 <% if @user == current_user %>
+
  <h1 class="text-center">Profile</h1>
  <%else%>
+
  <h1 class="text-center"><%= @user.fullname(@user) %>'s Info</h1>
  <hr>
  <%= render 'friend_unfriend' %>
  <%end%>
+<aside class="col-md-4">
+
+
  <div class="text-center">
- <h4><%= @user.firstname %> <%= @user.lastname%></h4>
+ <%= gravatar_for(@user,size:'50') %>
+ <h1><%= @user.firstname %> <%= @user.lastname%></h1>
 <h5><%=  @user.friends.count %> <%= link_to "Friends", friends_user_path(@user)  %></h5>
 <h5><strong>Birthday:</strong> <%= @user.date_of_birth %></h5>
 <h5><strong>Gender:</strong> <%= @user.gender %></h5>

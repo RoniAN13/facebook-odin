@@ -1,9 +1,13 @@
 <% current_user.pending_requests.each do |request| %>
-    <li>
-      <%= User.find(request.requestor_id).firstname %>
+    <li/>
+        <% user = User.find(request.requestor_id) %>
+   
+    <%= gravatar_for(user,size:60) %>
+     <p> <%= user.fullname(user) %><span style="color:grey"> sent you a friend request</span></p>
       <%= link_to 'Accept',
-      friend_request_path(friend_request_id: request.id),method: "PATCH",class:"btn btn-primary" %>
+      friend_request_path(friend_request_id: request.id),method: "PATCH",class:"btn btn-primary",style:"width:65px" %>
       <%= link_to 'Reject',
-      friend_request_path(friend_request_id: request.id),method: "DELETE",class:"btn btn-primary" %>
-    </li>
+      friend_request_path(friend_request_id: request.id),method: "DELETE",class:"btn btn-danger text-center",style:"width:65px" %>
+    <hr>
     <%end%>
+    </li>

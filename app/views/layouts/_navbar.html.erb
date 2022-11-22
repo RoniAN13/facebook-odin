@@ -22,6 +22,22 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
         <%= yield :right_nav %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Requests (<%= current_user.pending_requests.count%>)</a>
+          <ul class="dropdown-menu">
+          <% current_user.pending_requests.each do |request| %>
+            <li>
+            <a href=<%=user_path(current_user)%> style="width:380px;">
+                <% user = User.find(request.requestor_id) %>
+           
+            <%= gravatar_for(user,size:20) %>
+             <p> <%= user.fullname(user) %><span style="color:grey"> sent you a friend request</span></p>
+            </a>
+             </li>
+             <li role="separator" class="divider"></li>
+             <%end%>
+          </ul>
+        </li>
         <li><%= link_to "Users", users_path %></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.firstname %> <%=current_user.lastname %> <span class="caret"></span></a>
@@ -34,6 +50,7 @@
             <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
           </ul>
         </li>
+          
         <% else %>
         <li><%= link_to "Sign Up", new_user_registration_path %></li>
         <li><%= link_to "Login", new_user_session_path %></li>

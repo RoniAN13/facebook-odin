@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   validates :user_id, presence: true
   default_scope -> { order(created_at: :desc) }
   has_many :comments,dependent: :destroy
-  
-
+  has_one_attached :post_file
+  def display_image
+    post_file.variant(resize_to_limit: [500, 500])
+    end
 end

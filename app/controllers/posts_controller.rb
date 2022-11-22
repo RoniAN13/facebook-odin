@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   before_action :set_post , only: [:upvote, :downvote]
   def create
     @post = current_user.posts.build(post_params)
+    @post.post_file.attach(params[:post][:post_file])
     if @post.save
       flash[:success] = "Post created!"
       redirect_to root_url
@@ -44,7 +45,7 @@ def downvote
 end        
   private
     def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :post_file)
     end
     def set_post
       @post = Post.find(params[:id])
