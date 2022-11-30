@@ -9,7 +9,21 @@
 </section>
 </aside>
 <div class="col-md-8">
-<h3>Post Feed</h3>
+
+<%= form_with scope: :search, method: :get, local: true,data:{turbo: false} do |f| %>
+<table>
+   <tr><td><%= f.label "From : " %></td><td> <%= f.date_field :date_from %></td>
+   
+   <td><%= f.label "To : " %></td><td><%= f.date_field :date_to %></td>
+   <td><%= f.label "Likes From : " %></td><td><%= f.number_field :likes_from %></td>
+   <td><%= f.label "Likes To : " %></td><td><%= f.number_field :likes_to %></td>
+   </tr>
+   <tr>
+   <td><%= f.label "Users: " %></td><td><%= f.select :user_ids, options_from_collection_for_select(current_user.friends, :id, :firstname, {:selected => current_user.friends.split(';')}), {}, {:multiple => true,  :name => 'search[user_ids][]'} %></td>
+    <td> <%= f.submit "Search" %> </td></tr>
+    </table>
+<%end%>
+<h3>Post Feed (<%= @feed_items.count %>)</h3>
 <%= render 'shared/feed' %>
 </div>
 </div>

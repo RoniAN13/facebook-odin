@@ -7,6 +7,6 @@
  <% end %>
 <% if @user != current_user && current_user.friend_with?(@user) %>
  <%= link_to 'Unfriend',
-        friend_request_path(friend_request_id: FriendRequest.find_request(@user.id, current_user.id)),method: "DELETE",class:"btn btn-primary"  %>
+        friend_request_path(FriendRequest.find_request(@user.id, current_user.id)),method: "DELETE",class:"btn btn-primary"  %>
  <% end %>
  </div>

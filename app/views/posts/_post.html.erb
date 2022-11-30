@@ -1,5 +1,5 @@
 <li id="post-<%= post.id %>">
-
+<%= link_to gravatar_for(post.user, size: 50), post.user %>
 <span class="user"><%= link_to post.user.fullname(post.user), post.user %></span>
 <div style="width:400px">
 <span class="content"><%= post.content %>
@@ -32,7 +32,7 @@ Posted <%= time_ago_in_words(post.created_at) %> ago.
 <% if current_user == post.user %>
 <%= link_to "delete", post, method: :delete,
 data: { confirm: "You sure?" } %>
-<% end %>
+<%end%>
 
 <p style="color:black">Comments:</p>
 </span>

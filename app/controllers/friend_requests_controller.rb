@@ -8,16 +8,16 @@ class FriendRequestsController < ApplicationController
   end
 
   def destroy
-    friend_request = FriendRequest.find(params[:friend_request_id])
+    friend_request = FriendRequest.find(params[:id])
     friend_request.destroy
     redirect_to current_user
   end
 
   def update
-    @friend_request = FriendRequest.find(params[:friend_request_id])
+    @friend_request = FriendRequest.find(params[:id])
     
     @friend_request.update(status: "Accepted")
-    redirect_to curren_user
+    redirect_to current_user
   end
   
     

@@ -8,9 +8,13 @@ class User < ApplicationRecord
 has_many :friend_requests
 has_many :pending_requests, -> { where status: "Pending" }, class_name: 'FriendRequest', foreign_key: "receiver_id"
 has_many :posts, dependent: :destroy
-after_create_commit { broadcast_append_to "users" }
-has_many :comments, dependent: :destroy
 
+has_many :comments, dependent: :destroy
+def to_param
+ f =  firstname.split(' ').join('_')
+ l =  lastname.split(' ').join('_')
+  f+"-"+l
+end
 def friends
   friends_i_sent_request = FriendRequest.where(requestor_id: id, status:"Accepted").pluck(:receiver_id)
   friends_i_got_request = FriendRequest.where(receiver_id: id, status:"Accepted").pluck(:requestor_id)

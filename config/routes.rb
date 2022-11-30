@@ -10,15 +10,18 @@ Rails.application.routes.draw do
   
  
   devise_for :users
-  resources :users do
-   member do
-    get :friends
-    end
-  end
+ 
   resources :friend_requests
 root "static_pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
+  
+  resources :users , param: :fullname do
+    member do
+     get :friends
+     end
+   end
+  
 end

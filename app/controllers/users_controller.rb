@@ -9,13 +9,19 @@ class UsersController < ApplicationController
       end
   end   
   def show 
-      @user= User.find(params[:id])
+      fullname = params[:fullname].split("-")
+      firstname= (fullname.first).split('_').join(' ')
+      lastname= (fullname.last).split('_').join(' ')
+      @user= User.find_by(firstname:firstname,lastname:lastname)
       @users = @user.friends
       @posts = @user.posts.all
 
   end  
   def friends
-    @user = User.find(params[:id])
+    fullname = params[:fullname].split("-")
+    firstname= (fullname.first).split('_').join(' ')
+    lastname= (fullname.last).split('_').join(' ')
+    @user= User.find_by(firstname:firstname,lastname:lastname)
     @users = @user.friends
     render 'friends'
   end  
